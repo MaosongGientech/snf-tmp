@@ -32,7 +32,7 @@ importers:
 
   apps/web:
     dependencies:
-      '@repo/ui':
+      '@surge/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       next:
@@ -45,10 +45,10 @@ importers:
         specifier: ^19.2.0
         version: 19.2.0(react@19.2.0)
     devDependencies:
-      '@repo/eslint-config':
+      '@surge/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@repo/typescript-config':
+      '@surge/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@types/node':
@@ -67,12 +67,12 @@ importers:
         specifier: 5.9.2
         version: 5.9.2
 
-  packages/api-client-ai:
+  packages/api-client-aimodify:
     devDependencies:
-      '@repo/eslint-config':
+      '@surge/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@repo/typescript-config':
+      '@surge/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':
@@ -144,10 +144,10 @@ importers:
         specifier: ^19.2.0
         version: 19.2.0(react@19.2.0)
     devDependencies:
-      '@repo/eslint-config':
+      '@surge/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@repo/typescript-config':
+      '@surge/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':

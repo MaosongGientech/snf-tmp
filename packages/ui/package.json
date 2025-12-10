@@ -1,5 +1,5 @@
 {
-  "name": "@repo/ui",
+  "name": "@surge/ui",
   "version": "0.0.0",
   "type": "module",
   "private": true,
@@ -13,8 +13,8 @@
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@surge/eslint-config": "workspace:*",
+    "@surge/typescript-config": "workspace:*",
     "@types/node": "^22.15.3",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",

@@ -1,5 +1,5 @@
 {
-  "name": "@repo/api-client-ai",
+  "name": "@surge/api-client-ai",
   "version": "0.0.0",
   "type": "module",
   "private": true,
@@ -11,8 +11,8 @@
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@surge/eslint-config": "workspace:*",
+    "@surge/typescript-config": "workspace:*",
     "@types/node": "^22.15.3",
     "eslint": "^9.39.1",
     "typescript": "5.9.2"
