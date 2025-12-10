@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+out/
+
+# Package manager
+pnpm-lock.yaml
+
+# Environment
+.env*
+
+# IDE
+.vscode/
+.idea/
