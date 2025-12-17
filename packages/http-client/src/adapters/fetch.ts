@@ -1,12 +1,18 @@
-import HttpClientError, {
-  isHttpClientError,
-} from "../errors/httpClientError.js"
+import HttpClientError from "../httpClientError.js"
 import {
   RAWResponseConfig,
   ResolvedRAWRequestConfig,
   ResponseType,
 } from "../types.js"
+import { isHttpClientError } from "../utils.js"
 
+/**
+ * The fetch adapter.
+ *
+ * @template ForceSignal - Whether to force the signal to be true or false
+ * @param config - The request config.
+ * @returns The response config.
+ */
 export default async function adapter<ForceSignal extends boolean>(
   config: ResolvedRAWRequestConfig<ForceSignal>
 ): Promise<RAWResponseConfig> {
@@ -41,6 +47,7 @@ export default async function adapter<ForceSignal extends boolean>(
     if (isHttpClientError(error)) {
       throw error
     }
+
     throw new HttpClientError(
       `Invalid URL: ${error instanceof Error ? error.message : String(error)}`,
       HttpClientError.ERR_INVALID_URL,

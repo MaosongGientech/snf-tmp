@@ -2,7 +2,7 @@ import {
   RAWRequestConfig,
   RAWRequestConfigForceSignal,
   RAWResponseConfig,
-} from "../types.js"
+} from "./types.js"
 
 /**
  * The HttpClientError class is used to create HTTP client errors.
@@ -42,18 +42,4 @@ export default class HttpClientError extends Error {
 
     Object.setPrototypeOf(this, HttpClientError.prototype)
   }
-}
-
-/**
- * Check if an error is an HttpClientError.
- * @param error - The error to check.
- * @returns True if the error is an HttpClientError, false otherwise.
- */
-export function isHttpClientError(error: unknown): error is HttpClientError {
-  return (
-    error !== null &&
-    typeof error === "object" &&
-    "isHttpClientError" in error &&
-    error.isHttpClientError === true
-  )
 }

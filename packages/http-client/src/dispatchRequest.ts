@@ -1,11 +1,16 @@
 import fetchAdapter from "./adapters/fetch.js"
-import HttpClientError from "./errors/httpClientError.js"
+import HttpClientError from "./httpClientError.js"
 import {
   HttpClientAdapter,
   RAWResponseConfig,
   ResolvedRAWRequestConfig,
 } from "./types.js"
 
+/**
+ * Dispatch the request.
+ * @param config - The request config.
+ * @returns The response config.
+ */
 const dispatchRequest = async <
   ForceSignal extends boolean,
   T = unknown,

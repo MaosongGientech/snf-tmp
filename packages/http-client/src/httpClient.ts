@@ -1,5 +1,5 @@
-import HttpClientError from "./errors/httpClientError.js"
 import dispatchRequest from "./dispatchRequest.js"
+import HttpClientError from "./httpClientError.js"
 import InterceptorManager from "./interceptorManager.js"
 import {
   RAWRequestConfig,
@@ -22,14 +22,20 @@ type RequestConfigArgs<
 /**
  * The HttpClient class is used to send HTTP requests.
  *
- * @example
+ * @template ForceSignal - Whether to force the signal to be true or false
+ * @param baseConfig - The base config to use for the request
+ * @returns The HttpClient instance
+ *
+ * @example With force signal
  * ```typescript
  * const httpClient = new HttpClient({
  *   baseURL: "https://api.example.com/v2",
  *   timeout: 10000,
  * })
  *
- * const usersResponse = await httpClient.get("/users")
+ * const usersResponse = await httpClient.get("/users", {
+ *   signal: new AbortSignal(),
+ * })
  * console.log(usersResponse.data)
  *
  * try {
@@ -39,11 +45,23 @@ type RequestConfigArgs<
  *   }, {
  *     baseURL: "https://api.example.com/v1",
  *     timeout: 3000,
+ *     signal: new AbortSignal(),
  *   })
  *   console.log(loginResponse.data)
  * } catch (error) {
  *   console.error(error)
  * }
+ * ```
+ *
+ * @example Without force signal
+ * ```typescript
+ * const httpClient = new HttpClient({
+ *   baseURL: "https://api.example.com/v2",
+ *   timeout: 10000,
+ * })
+ *
+ * const usersResponse = await httpClient.get("/users")
+ * console.log(usersResponse.data)
  * ```
  */
 export default class HttpClient<ForceSignal extends boolean = true> {
@@ -95,6 +113,8 @@ export default class HttpClient<ForceSignal extends boolean = true> {
   /**
    * Send an HTTP request.
    *
+   * @template T - The type of the response data
+   * @template D - The type of the request data
    * @param configOrUrl - The URL or RequestConfig to use for the request
    * @param config - The RequestConfig to use for the request
    * @returns The ResponseConfig for the request
@@ -222,6 +242,8 @@ export default class HttpClient<ForceSignal extends boolean = true> {
   /**
    * Get a resource.
    *
+   * @template T - The type of the response data
+   * @template D - The type of the request data
    * @param url - The URL to get the resource from
    * @param config - The RequestConfig to use for the request
    * @returns The ResponseConfig for the request
@@ -241,6 +263,8 @@ export default class HttpClient<ForceSignal extends boolean = true> {
   /**
    * Send a POST request.
    *
+   * @template T - The type of the response data
+   * @template D - The type of the request data
    * @param url - The URL to send the request to
    * @param data - The data to send with the request
    * @param config - The RequestConfig to use for the request
@@ -263,6 +287,8 @@ export default class HttpClient<ForceSignal extends boolean = true> {
   /**
    * Send a PUT request.
    *
+   * @template T - The type of the response data
+   * @template D - The type of the request data
    * @param url - The URL to send the request to
    * @param data - The data to send with the request
    * @param config - The RequestConfig to use for the request
@@ -285,6 +311,8 @@ export default class HttpClient<ForceSignal extends boolean = true> {
   /**
    * Send a PATCH request.
    *
+   * @template T - The type of the response data
+   * @template D - The type of the request data
    * @param url - The URL to send the request to
    * @param data - The data to send with the request
    * @param config - The RequestConfig to use for the request
@@ -307,6 +335,8 @@ export default class HttpClient<ForceSignal extends boolean = true> {
   /**
    * Send a DELETE request.
    *
+   * @template T - The type of the response data
+   * @template D - The type of the request data
    * @param url - The URL to send the request to
    * @param config - The RequestConfig to use for the request
    * @returns The ResponseConfig for the request
@@ -326,6 +356,8 @@ export default class HttpClient<ForceSignal extends boolean = true> {
   /**
    * Send a HEAD request.
    *
+   * @template T - The type of the response data
+   * @template D - The type of the request data
    * @param url - The URL to send the request to
    * @param config - The RequestConfig to use for the request
    * @returns The ResponseConfig for the request
@@ -345,6 +377,8 @@ export default class HttpClient<ForceSignal extends boolean = true> {
   /**
    * Send a OPTIONS request.
    *
+   * @template T - The type of the response data
+   * @template D - The type of the request data
    * @param url - The URL to send the request to
    * @param config - The RequestConfig to use for the request
    * @returns The ResponseConfig for the request
@@ -364,6 +398,8 @@ export default class HttpClient<ForceSignal extends boolean = true> {
   /**
    * Send a PURGE request.
    *
+   * @template T - The type of the response data
+   * @template D - The type of the request data
    * @param url - The URL to send the request to
    * @param config - The RequestConfig to use for the request
    * @returns The ResponseConfig for the request
@@ -383,6 +419,8 @@ export default class HttpClient<ForceSignal extends boolean = true> {
   /**
    * Send a LINK request.
    *
+   * @template T - The type of the response data
+   * @template D - The type of the request data
    * @param url - The URL to send the request to
    * @param config - The RequestConfig to use for the request
    * @returns The ResponseConfig for the request
@@ -402,11 +440,13 @@ export default class HttpClient<ForceSignal extends boolean = true> {
   /**
    * Send a UNLINK request.
    *
+   * @template T - The type of the response data
+   * @template D - The type of the request data
    * @param url - The URL to send the request to
    * @param config - The RequestConfig to use for the request
    * @returns The ResponseConfig for the request
    */
-  unlink<T, D>(
+  unlink<T = unknown, D = unknown>(
     url: string | URL,
     ...args: RequestConfigArgs<ForceSignal, D>
   ): Promise<ResponseConfig<T, D>> {

@@ -1,3 +1,6 @@
+/**
+ * The HTTP methods supported by the HttpClient.
+ */
 export type HttpClientMethod =
   | "get"
   | "GET"
@@ -20,6 +23,9 @@ export type HttpClientMethod =
   | "unlink"
   | "UNLINK"
 
+/**
+ * The response types supported by the HttpClient.
+ */
 export type ResponseType =
   | "arraybuffer"
   | "blob"
@@ -29,16 +35,28 @@ export type ResponseType =
   | "stream"
   | "formdata"
 
+/**
+ * The search params supported by the HttpClient.
+ */
 export type SearchParams =
   | URLSearchParams
   | Record<string, unknown | readonly unknown[]>
 
+/**
+ * The HttpClient adapter interface.
+ */
 export interface HttpClientAdapter<ForceSignal extends boolean> {
   (config: ResolvedRAWRequestConfig<ForceSignal>): Promise<RAWResponseConfig>
 }
 
+/**
+ * The HttpClient adapter name.
+ */
 export type HttpClientAdapterName = "fetch"
 
+/**
+ * The RAW request config.
+ */
 export type RAWRequestConfig<D = unknown> = Omit<
   RequestInit,
   "body" | "method"
@@ -78,6 +96,9 @@ export type RAWRequestConfig<D = unknown> = Omit<
   }
 }
 
+/**
+ * The RAW request config with force signal.
+ */
 export type RAWRequestConfigForceSignal<D = unknown> = Omit<
   RAWRequestConfig<D>,
   "adapter" | "signal"
@@ -86,6 +107,9 @@ export type RAWRequestConfigForceSignal<D = unknown> = Omit<
   signal: AbortSignal | false
 }
 
+/**
+ * The resolved RAW request config.
+ */
 export type ResolvedRAWRequestConfig<
   ForceSignal extends boolean,
   D = unknown,
@@ -93,11 +117,17 @@ export type ResolvedRAWRequestConfig<
   ? RAWRequestConfigForceSignal<D>
   : RAWRequestConfig<D>
 
+/**
+ * The request config.
+ */
 export type RequestConfig<D = unknown> = Omit<
   RAWRequestConfig<D>,
   "isRequestConfig"
 >
 
+/**
+ * The request config with force signal.
+ */
 export type RequestConfigForceSignal<D = unknown> = Omit<
   RequestConfig<D>,
   "adapter" | "signal"
@@ -106,11 +136,17 @@ export type RequestConfigForceSignal<D = unknown> = Omit<
   signal: AbortSignal | false
 }
 
+/**
+ * The resolved request config.
+ */
 export type ResolvedRequestConfig<
   ForceSignal extends boolean,
   D = unknown,
 > = ForceSignal extends true ? RequestConfigForceSignal<D> : RequestConfig<D>
 
+/**
+ * The RAW response config.
+ */
 export type RAWResponseConfig<T = unknown, D = unknown> = Response & {
   readonly isResponseConfig: true
 
@@ -121,6 +157,9 @@ export type RAWResponseConfig<T = unknown, D = unknown> = Response & {
   data?: T
 }
 
+/**
+ * The response config.
+ */
 export type ResponseConfig<T = unknown, D = unknown> = Omit<
   RAWResponseConfig<T, D>,
   "isResponseConfig"
