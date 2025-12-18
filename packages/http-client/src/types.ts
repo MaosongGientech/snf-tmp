@@ -103,7 +103,7 @@ export type RAWRequestConfigForceSignal<D = unknown> = Omit<
   RAWRequestConfig<D>,
   "adapter" | "signal"
 > & {
-  adapter: HttpClientAdapter<true> | HttpClientAdapterName
+  adapter?: HttpClientAdapter<true> | HttpClientAdapterName
   signal: AbortSignal | false
 }
 
@@ -132,7 +132,7 @@ export type RequestConfigForceSignal<D = unknown> = Omit<
   RequestConfig<D>,
   "adapter" | "signal"
 > & {
-  adapter: HttpClientAdapter<true> | HttpClientAdapterName
+  adapter?: HttpClientAdapter<true> | HttpClientAdapterName
   signal: AbortSignal | false
 }
 
